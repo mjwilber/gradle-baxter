@@ -1,0 +1,49 @@
+// apply plugin: 'sonar-runner'
+/*
+sonarRunner {
+  sonarProperties {
+    property 'sonar.projectName', 'todo'
+    property 'sonar.projectDescription', 'A task management application'
+  }
+}
+*/
+
+allprojects {
+  group = 'com.bybaxter.todo'
+  version = '0.13.0'
+}
+
+subprojects{
+// apply from: "$rootDir/gradle/jacoco.gradle"
+    repositories {
+        mavenCentral()
+    }
+  apply plugin: 'java'
+
+  // 1.5 is needed for our JRE 5 requirements for Applet delivery
+  // Once they are removed we can remove this or bump up the compatibility
+  sourceCompatibility = '1.5'
+  targetCompatibility = '1.5'
+
+/*
+  sonarRunner {
+    sonarProperties {
+      property 'sonar.sourceEncoding', 'UTF-8'
+    }
+  }
+*/
+
+    dependencies {
+//        compile 'commons-lang:commons-lang:2.5'
+//        compile 'log4j:log4j:1.2.16'
+//        compile 'org.springframework:spring-context:4.0.5.RELEASE'
+//        compile 'com.googlecode.lambdaj:lambdaj:2.2'
+        testCompile 'junit:junit:4.11'
+//        testCompile 'org.mockito:mockito-all:1.9.5'
+    }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "2.0-rc-2"
+  distributionUrl = "http://nexus.bybaxter.com:8081/content/groups/TestingProphet/org/gradle/distribution/gradle/2.0-rc-2/gradle-2.0-rc-2-all.zip"
+}
